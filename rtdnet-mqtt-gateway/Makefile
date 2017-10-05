@@ -38,6 +38,7 @@ define Package/rtdnet-mqtt-gateway/install
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/src/rtdnet-mqtt-gateway $(1)/usr/bin/rtdnet-mqtt-gateway
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/src/rtdnet-status $(1)/usr/bin/rtdnet-status
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/src/rtdnet-set-temp $(1)/usr/bin/rtdnet-set-temp
+    $(CP) ./files/* $(1)/
 endef
 
 MAKE_FLAGS += UNAME=Linux

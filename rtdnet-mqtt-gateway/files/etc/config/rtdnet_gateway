@@ -1,0 +1,5 @@
+config rtdnet_gateway
+    option id 'rtdnet'
+    option device '/dev/ttyUSB0'
+    option broker_host 'localhost'
+    #option debug '1'
