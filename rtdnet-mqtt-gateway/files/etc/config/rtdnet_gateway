@@ -1,5 +1,7 @@
 config rtdnet_gateway
     option id 'rtdnet'
+    option server_address '1'
     option device '/dev/ttyUSB0'
     option broker_host 'localhost'
+    option publish_delay '60'
     #option debug '1'
