@@ -4,16 +4,22 @@ USE_PROCD=1
 PROG=/usr/bin/rtdnet-mqtt-gateway
 CFGNAME=rtdnet_gateway
 
+START=99
+
 rtdnet_gateway_instance()
 {
   local config="$1"
   local broker_host;
+  local broker_user;
+  local broker_pw;
   local id;
   local device;
   local server_address;
   local publish_delay;
 
   config_get broker_host ${config} broker_host
+  config_get broker_user ${config} broker_user
+  config_get broker_pw ${config} broker_pw
   config_get id ${config} id
   config_get server_address ${config} server_address
   config_get device ${config} device
@@ -22,6 +28,8 @@ rtdnet_gateway_instance()
 
   procd_open_instance rtdnet_gateway
   procd_set_param command ${PROG} -h ${broker_host} -i ${id} --server-address ${server_address} --device ${device}
+  [ "0${broker_user}" != "0" ] && procd_append_param command -u ${broker_user}
+  [ "0${broker_pw}" != "0" ] && procd_append_param command -P ${broker_pw}
   [ "0${publish_delay}" -ne 0 ] && procd_append_param command --publish-delay ${publish_delay}
   [ "0${debug}" -eq 1 ] && procd_append_param command -d
 
